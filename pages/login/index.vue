@@ -144,6 +144,7 @@
 						password: that.password
 					},
 					success: function(e) {
+						 
 						var res = e.data;
 						if (res.error) {
 							uni.showToast({

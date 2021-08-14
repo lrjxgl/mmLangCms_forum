@@ -1,129 +1,131 @@
 <template>
-	<view >
-		<view class="header">
-			<view class="header-back"></view>
-			<view class="header-title">文章</view>
+	<view>
+		<view v-if="!pageLoad" class="">
+			<page-loading></page-loading>
 		</view>
-		<view class="header-row"></view>
-		<view class="main-body" v-if="pageLoad">
-			<scroll-view v-if="Object.keys(pageData.catlist).length>0" class="bg-fff" scroll-x="true">
+		<view v-if="pageLoad">
+			<scroll-view class="bg-fff" scroll-x="true">
 				<view class="tabs-border">
-					<view @click="setCatid(scatid)" :class="catid==scatid?'tabs-border-active':''" class="tabs-border-item">全部</view>
-					<view @click="setCatid(item.catid)" v-for="(item,index) in pageData.catlist" :key="index" :class="catid==item.catid?'tabs-border-active':''"  class="tabs-border-item" >{{item.cname}}</view>
-							
-				</view>	
-			</scroll-view>
-			<view class="sglist">
-				<view class="sglist-item" v-for="(item,key) in pageData.list" :key="key" @click="goArticle(item.id)">
-					<view v-if="item.imgurl" class="sglist-imgbox">
-						<image class="sglist-img" mode="widthFix" :src="item.imgurl+'.middle.png'"></image>
-					</view>
-					 				 
-					<view class="sglist-title">{{item.title}}</view>
- 
-					<view class="sglist-desc">
-						{{item.description}}
-					</view>
-					<view class="flex flex-jc-bettwen pd-10">
-						 
-						<view class="btn-love btn-love-small mgr-5">{{item.love_num}}</view>
-						<view class="btn-fav btn-fav-small mgr-5">{{item.fav_num}}</view>
-						<view class="btn-comment btn-comment-small">{{item.comment_num}}</view>
-					</view>	
-									 
+					<view @click="setCat(0)"  :class="catid==0?'tabs-border-active':''" class="tabs-border-item-inner ">全部</view>
+					<view 
+					class="tabs-border-item-inner" 
+					:class="catid==item.catid?'tabs-border-active':''" 
+					v-for="(item,key) in  catList"
+					 :key="key" @click="setCat(item.catid)">{{item.cname}}</view>
 				</view>
-				 
-				 
+			</scroll-view>
+
+			<view class="main-body">
+				<view class="flexlist">
+					<view @click="goArticle(item.id)" class="flexlist-item pdb-10" v-for="(item,index) in  list" :key="index">
+
+						<image v-if="item.imgurl!=''" class="flexlist-img" :src="item.imgurl+'.100x100.png'"></image>
+						<view class="flex-1">
+							<view class="flexlist-title f16">{{item.title}}</view>
+							<view class="flexlist-desc cl2 f14">{{item.description}}</view>
+						</view>
+
+					</view>
+				</view>
+
+
 			</view>
 		</view>
-		<go-top></go-top> 
+		<go-top></go-top>
 	</view>
 </template>
 
 <script>
-	 
-	var isFirst=false;
+	import mtFooter from "../../components/footer.vue";
 	export default{
-		 
 		data:function(){
 			return {
-				pageData:{},
 				pageLoad:false,
-				type:"",
+				list:[],
 				per_page:0,
-				catid:0,
-				scatid:0,
+				isFirst:true,
+				catList:[],
+				catid:0
 			}
 		},
 		onLoad:function(ops){
 			this.catid=ops.catid;
-			this.scatid=ops.catid;
 			this.getPage();
+		},
+		onReachBottom:function(){
+			this.getList();
+		},
+		onPullDownRefresh:function(){
+			this.getPage();
+			uni.stopPullDownRefresh();
+		},
+		onShareAppMessage:function(){
 			
 		},
-		methods:{
-			setCatid:function(catid){
-				this.catid=catid;
-				isFirst=true;
-				this.per_page=0;
-				this.getList();
+		onShareTimeline:function(){
+			
+		},
+		methods: {
+			gourl:function(url){
+				uni.navigateTo({
+					url:url
+				})
+			},
+			getPage:function() {
+				var that=this;
+				that.app.get({
+					url:that.app.apiHost+"/article/list",
+					data:{
+						catid:this.catid
+					},
+					success:function(res){
+						that.pageLoad=true;
+						that.list=res.list;
+						that.per_page=res.per_page;
+						that.catList=res.catList;
+					}
+				})
+			},
+			getList:function() {
+				var that=this;
+				if(that.per_page==0 && !that.isFirst){
+					return false;
+				}
+				that.app.get({
+					url:that.app.apiHost+"/article/list",
+					data:{
+						per_page:that.per_page,
+						catid:this.catid
+					},
+					success:function(res){						 
+						that.per_page=res.per_page;
+						if(that.isFirst){
+							that.list=res.list;
+							that.isFirst=false;
+						}else{
+							for(var i in res.list){
+								that.list.push(res.list[i]);
+							}							
+						}
+						
+					}
+				})
 			},
 			goArticle:function(id){
 				uni.navigateTo({
 					url:"show?id="+id
 				})
 			},
-			getPage:function(){
-				var that=this;
-				that.app.get({
-					url:that.app.apiHost+"/index.php?m=article&a=list&ajax=1&catid="+this.catid,
-					dataType:"json",
-					success:function(res){
-						that.pageData=res.data;
-						that.pageLoad=true;
-						that.per_page=res.data.per_page;
-						isFirst=false;
-						uni.setNavigationBarTitle({
-							title:res.data.cat.cname
-						})
-					}
-				})
-			},
-			getList:function(){
-				var that=this;
-				if(that.per_page==0 && !isFirst){
-					skyToast("已经到底了");
-					return false;
-				}
-				that.app.get({
-					url:that.app.apiHost+"/index.php?m=article&a=list&ajax=1&catid="+this.catid,
-					data:{
-						type:that.type,
-						per_page:that.per_page,
-						catid:this.catid
-					},
-					dataType:"json",
-					success:function(res){
-						that.per_page=res.data.per_page;
-						if(isFirst){
-							that.pageData.list=res.data.list;
-						}else{
-							var list=that.pageData.list;
-							for(var i=0;i<res.data.list.length;i++){
-								list.push(res.data.list[i]);
-							}
-							that.pageData.list=list;
-						}
-						isFirst=false;
-					}
-				})
+			setCat:function(catid){
+				this.catid=catid;
+				this.per_page=0;
+				this.isFirst=true;
+				this.getList();
 			}
-		}
-	}
+		},
+	} 
 </script>
-<style>
-	.tabs-border-item{
-		width: 60px;
-	}
-</style>
 
+<style>
+
+</style>

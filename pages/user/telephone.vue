@@ -35,7 +35,7 @@
 		},
 		onLoad: function(option) {
 			uni.setNavigationBarTitle({
-				title: "支付密码"
+				title: "绑定手机号码"
 			})
 			this.getPage();
 		},

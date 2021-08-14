@@ -3,7 +3,9 @@
 		<view v-if="errMsg!=''" class="emptyData">文章出走啦</view>
 		<view class="pd-10 bg-fff" v-if="pageLoad">
 			<view class="d-title">{{data.title}}</view>
-			 
+			<div class="flex mgb-10">
+				<div class="f12 cl3">{{data.createtime}}</div>
+			</div> 
 			<view class="d-content">
 			 
 				<jyf-parser class="wmax" :html="data.content" ref="article"></jyf-parser> 

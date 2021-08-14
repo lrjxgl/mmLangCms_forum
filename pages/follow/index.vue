@@ -22,7 +22,7 @@
 					</div>
 				</div>
 				<div>
-					<div v-if="item.isfollow" @click="followToggle(item)" class="btn-mini">取消关注</div>
+					<div v-if="item.isFollow" @click="followToggle(item)" class="btn-mini">取消关注</div>
 					<div v-else @click="followToggle(item)" class="btn-mini">关注</div>
 				</div>
 			</div>
@@ -57,16 +57,16 @@
 					return false;
 				}
 				that.app.get({
-					url: that.app.apiHost+"/index.php?m=follow&ajax=1",
+					url: that.app.apiHost+"/follow/index",
 					dataType: "json",
 					data:{
 						userid:this.userid
 					},
 					success: function(res) {
 						that.isFirst=false;
-						that.per_page=res.data.per_page;
-						for(var i in res.data.list){
-							that.list.push(res.data.list[i]);
+						that.per_page=res.per_page;
+						for(var i in res.list){
+							that.list.push(res.list[i]);
 						}
 						
 					}
@@ -75,16 +75,16 @@
 			getFollowed: function() {
 				var that = this;
 				that.app.get({
-					url: that.app.apiHost+"/index.php?m=follow&a=followed&ajax=1",
+					url: that.app.apiHost+"/follow/followed",
 					dataType: "json",
 					data:{
 						userid:this.userid
 					},
 					success: function(res) {
 						that.isFirst=false;
-						that.per_page=res.data.per_page;
-						for(var i in res.data.list){
-							that.list.push(res.data.list[i]);
+						that.per_page=res.per_page;
+						for(var i in res.list){
+							that.list.push(res.list[i]);
 						}
 					}
 				})
@@ -110,7 +110,7 @@
 							success:function(res){
 								if(res.confirm){
 									that.app.get({
-										url: that.app.apiHost+"/index.php?m=follow&a=Toggle&ajax=1",
+										url: that.app.apiHost+"/follow/toggle",
 										dataType: "json",
 										data: {
 											t_userid: item.userid
@@ -132,14 +132,13 @@
 						break;
 					default:
 						that.app.get({
-							url: that.app.apiHost+"/index.php?m=follow&a=Toggle&ajax=1",
+							url: that.app.apiHost+"/follow/toggle",
 							dataType: "json",
 							data: {
 								t_userid: item.userid
 							},
 							success: function(res) {
 								item.isfollow = res.follow;
-	
 							}
 						});
 						break;

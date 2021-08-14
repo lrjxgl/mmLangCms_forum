@@ -31,11 +31,6 @@
 			}
 		},
 		{
-			"path": "pages/bankcard/index",
-			"style": {
-				"navigationBarTitleText": "银行卡"
-			}
-		}, {
 			"path": "pages/city/index",
 			"style": {
 				"navigationBarTitleText": "城市"
@@ -208,19 +203,7 @@
 				"navigationBarTitleText": "收货地址添加"
 			}
 		},
-		{
-			"path": "pages/user_address/edit",
-			"style": {
-				"navigationBarTitleText": "收货地址编辑"
-			}
-		},
-		{
-			"path": "pages/user_address/orderadd",
-			"style": {
-				"navigationBarTitleText": "收货地址添加"
-			}
-		},
-
+		 
 		{
 			"path": "pages/user/set",
 			"style": {

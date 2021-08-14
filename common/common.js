@@ -2,6 +2,7 @@ module.exports = {
 	//apiHost:"http://fd175.skymvc.com/",
 	//apiHost: "http://127.0.0.1:8080",
 	apiHost: "http://127.0.0.1:888",
+	//apiHost: "http://127.0.0.1:1323",
 	appRoot: "https://www.fd175.com/uniapp/h5/",
 	wsHost: "wss://wss.deituicms.com:8282",
 	

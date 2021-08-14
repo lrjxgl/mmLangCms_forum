@@ -44,6 +44,9 @@
 				
 			},
 			upload:function(){
+				if(!this.app.canPost()){
+					return false;
+				}
 				var that=this;
 				uni.chooseImage({
 					success: (chooseImageRes) => {

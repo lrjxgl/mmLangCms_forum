@@ -136,6 +136,9 @@
 					data:e.detail.value,
 					
 					success:function(res){
+						if(res.error!=0){
+							return false;
+						}
 						uni.showToast({
 							title: res.message,
 							duration: 2000,
