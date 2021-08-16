@@ -157,7 +157,7 @@
 						that.list=res.list;
 						that.per_page=res.per_page;
 						uni.setNavigationBarTitle({
-							title:res.t_nickname
+							title:res.user.nickname
 						})
 						var it=setTimeout(function(){
 							const query = uni.createSelectorQuery().in(that);
