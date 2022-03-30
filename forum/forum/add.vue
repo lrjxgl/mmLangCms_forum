@@ -123,7 +123,7 @@
 						}
 						that.unLogin=false;
 						that.pageLoad = true;
-						that.grouplist = res.groupList;
+						that.grouplist = res.data.groupList;
 						
 					}
 				})

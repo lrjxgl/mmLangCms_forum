@@ -42,7 +42,7 @@
 					url:that.app.apiHost+"/index.php?m=coupon&ajax=1",
 					dataType:"json",
 					success:function(res){
-						that.pageData=res.data;
+						that.pageData=res.data.data;
 						that.pageLoad=true;
 					}
 				})

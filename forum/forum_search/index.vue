@@ -61,7 +61,7 @@
 					dataType: "json",
 					success: function(res) {
 						that.pageLoad = true;
-						that.list = res.list;
+						that.list = res.data.list;
 					}
 				})
 			},

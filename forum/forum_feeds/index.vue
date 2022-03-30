@@ -56,8 +56,8 @@
 						}
 						that.isFirst=false;
 						that.pageLoad=true;
-						that.list=res.list;
-						that.per_page=res.per_page;
+						that.list=res.data.list;
+						that.per_page=res.data.per_page;
 						 
 					}
 				})

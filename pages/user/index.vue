@@ -148,7 +148,7 @@
 							that.unLogin=true;
 						} else {
 							that.unLogin=false;
-							that.user = res.user;
+							that.user = res.data.user;
 						}
 						that.pageLoad=true;
 

@@ -42,7 +42,7 @@
 							that.app.goHome();
 						}else{
 							that.pageLoad=true;
-							that.user=res.user;
+							that.user=res.data.user;
 						}
 						
 						 
@@ -58,7 +58,7 @@
 						uni.showToast({
 							"title":res.message
 						})
-						return false;
+						 
 						if(!res.error){
 							setTimeout(function(){
 								uni.navigateBack()

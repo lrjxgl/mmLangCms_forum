@@ -60,8 +60,8 @@
 						}
 						that.isFirst=false;
 						that.pageLoad=true;
-						that.list=res.list;
-						that.per_page=res.per_page;
+						that.list=res.data.list;
+						that.per_page=res.data.per_page;
 						 
 					}
 				})
@@ -81,14 +81,14 @@
 						}
 						if(that.isFirst){
 							that.isFirst=false;
-							that.list=res.list;
+							that.list=res.data.list;
 						}else{
-							for(var i in res.list){
-								that.list.push(res.list[i]);
+							for(var i in res.data.list){
+								that.list.push(res.data.list[i]);
 							}
 						}
 						 
-						that.per_page=res.per_page;
+						that.per_page=res.data.per_page;
 						 
 					}
 				})

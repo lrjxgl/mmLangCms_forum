@@ -122,11 +122,11 @@
 							})
 						} else {
 							that.isFirst = false;
-							that.flashList=res.flashList;
+							that.flashList=res.data.flashList;
 							
-							that.navList = res.navList;
+							that.navList = res.data.navList;
 							
-							that.list=res.recList;
+							that.list=res.data.recList;
 							that.pageLoad = true;
 						}
 

@@ -102,7 +102,7 @@
 							 
 						}else{
 							that.unLogin = false;
-							that.list = res.list;
+							that.list = res.data.list;
 							uni.pageScrollTo({
 								scrollTop:10000
 							})
@@ -123,14 +123,14 @@
 						per_page: that.per_page
 					},
 					success: function(res) {
-						that.per_page = res.per_page;
+						that.per_page = res.data.per_page;
 						if (that.isFirst) {
-							for (var i in res.list) {
-								that.list.push(res.list[i]);
+							for (var i in res.data.list) {
+								that.list.push(res.data.list[i]);
 							}
 							that.isFirst = false;
 						} else {
-							that.list = res.list;
+							that.list = res.data.list;
 						}
 						uni.pageScrollTo({
 							scrollTop:10000

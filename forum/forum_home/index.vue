@@ -76,8 +76,8 @@
 					dataType:"json",
 					success:function(res){
 						that.pageLoad=true;
-						that.list=res.list;
-						that.user=res.user;
+						that.list=res.data.list;
+						that.user=res.data.user;
 					}
 				})
 			},
@@ -98,7 +98,7 @@
 							})
 							return false;
 						}
-						item.isFollow = res.isFollow;
+						item.isFollow = res.data.isFollow;
 						
 						that.user=item;
 					 

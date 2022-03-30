@@ -60,7 +60,7 @@
 					url: that.app.apiHost + "/user_address/add",
 					success: function(res) {
 						that.pageLoad = true;
-						that.pageData = res.data;
+						that.pageData = res.data.data;
 
 					}
 				})

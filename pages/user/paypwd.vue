@@ -3,7 +3,7 @@
 		<form @submit="submit">
 			<view class="input-flex">
 				<view class="input-flex-label">支付密码</view>
-				<input password="password" class="input-flex-text" name="paypwd">
+				<input password="password" v-model="paypwd" class="input-flex-text" name="paypwd">
 			</view>
 			<view class="input-flex">
 				<view class="input-flex-label">手机</view>
@@ -28,6 +28,7 @@
 			return {
 				pageLoad: false,
 				yzm: "",
+				paypwd:"",
 				telephone: "",
 				yzmClass: "",
 				yzmStatus: "获取验证码",
@@ -63,13 +64,13 @@
 					url:that.app.apiHost+"/user/info",
 					 
 					success:function(res){
-						if(res.user.telephone==''){
+						if(res.data.user.telephone==''){
 							uni.redirectTo({
 								url:"telephone"
 							})
 							return false;
 						}
-						that.telephone=res.user.telephone;
+						that.telephone=res.data.user.telephone;
 					}
 				})
 			},
@@ -96,7 +97,8 @@
 					url: this.app.apiHost + "/user/paypwdsave",
 					data:{
 						yzm:this.yzm,
-						telephone:this.telephone
+						telephone:this.telephone,
+						paypwd:this.paypwd
 					},
 					success: function(res) {
 						uni.showToast({

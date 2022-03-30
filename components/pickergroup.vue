@@ -68,7 +68,7 @@
 					}
 				}
 				this.catid=this.data[m]['child'][n].catid;
-				pholder=pholder+" "+this.data[m]['child'][n].title;
+				pholder=pholder+"  "+this.data[m]['child'][n].title;
 			}
 			this.child = this.data[m]['child'];
 			
@@ -87,7 +87,7 @@
 				var pholder=this.data[m].title;
 				
 				if(this.data[m]['child']!=null){
-					pholder+=this.data[m]['child'][n].title;
+					pholder=pholder+" "+ this.data[m]['child'][n].title;
 					this.catid=this.data[m]['child'][n].catid;
 				}else{
 					this.catid=0;

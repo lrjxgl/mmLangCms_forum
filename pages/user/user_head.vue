@@ -54,17 +54,14 @@
 									})
 									return false;
 								}
-								uni.request({
-									url:that.app.apiHost+"/user/headsave?token="+that.app.getToken(),
+								that.app.post({
+									url:that.app.apiHost+"/user/headsave",
 									data:{
 										user_head:data.imgurl
 									},
-									method:"POST",
-									header:{
-										"content-type":"application/x-www-form-urlencoded"
-									},
+				
 									success:function(res){
-										that.user_head=data.trueimgurl;
+										that.user_head=res.data.trueimgurl;
 									}
 								})
 							}

@@ -126,16 +126,18 @@
 					success: function(res) {
 						if (res.error) {
 							that.error=true;
+							that.pageLoad = true;
 							return false;
 						}
-						that.pageLoad = true;
-						that.data = res.data;
-						that.author = res.author;
-						that.imgsList = res.data.imgsList;
+						
+						that.data = res.data.data;
+						that.author = res.data.author;
+						that.imgsList = res.data.data.imgsList;
 						console.log(that.imgsList)
 						uni.setNavigationBarTitle({
-							title: res.data.title
+							title: res.data.data.title
 						})
+						that.pageLoad = true;
 					}
 				})
 			}

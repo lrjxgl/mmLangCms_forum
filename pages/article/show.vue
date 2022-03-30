@@ -79,10 +79,10 @@
 							return false;
 						}
 						that.pageLoad=true;
-						that.data=res.data;
-						that.shareLink=that.app.appRoot+"/article/show?id="+res.data.id;
+						that.data=res.data.data;
+						that.shareLink=that.app.appRoot+"/article/show?id="+res.data.data.id;
 						uni.setNavigationBarTitle({
-							title:res.data.title
+							title:res.data.data.title
 						})
 					}
 				})

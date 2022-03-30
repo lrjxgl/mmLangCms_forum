@@ -53,7 +53,7 @@
 							that.app.goHome();
 						}else{
 							that.pageLoad=true;
-							that.user=res.user;
+							that.user=res.data.user;
 						}
 						
 						 

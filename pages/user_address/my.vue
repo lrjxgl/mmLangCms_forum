@@ -77,9 +77,9 @@
 					url: that.app.apiHost + "/user_address/my",
 					success: function(res) {
 						that.isFirst = false;
-						that.list = res.list;
-						that.per_page = res.per_page;
-						that.rscount = res.rscount;
+						that.list = res.data.list;
+						that.per_page = res.data.per_page;
+						that.rscount = res.data.rscount;
 					}
 				})
 			},

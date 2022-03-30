@@ -77,15 +77,15 @@
 								url:"/pages/login/index",
 							})
 						}else{
-							that.catList=res.catList;
-							that.group=res.group;
+							that.catList=res.data.catList;
+							that.group=res.data.group;
 							that.isFirst=false;
 							that.pageLoad=true;
-							that.list=res.list;
-							that.per_page=res.per_page;
+							that.list=res.data.list;
+							that.per_page=res.data.per_page;
 							 
 							uni.setNavigationBarTitle({
-								title: res.group.title
+								title: res.data.group.title
 							});
 						}
 						 
@@ -112,13 +112,13 @@
 						if(res.error){
 							return false;
 						}
-						that.per_page=res.per_page; 
+						that.per_page=res.data.per_page; 
 						if(that.isFirst){
-							that.list=res.list;
+							that.list=res.data.list;
 							that.isFirst=false;
 						}else{
-							for(var i in res.list){
-								that.list.push(res.list[i])
+							for(var i in res.data.list){
+								that.list.push(res.data.list[i])
 							}
 							
 						}

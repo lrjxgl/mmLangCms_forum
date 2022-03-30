@@ -61,7 +61,7 @@
 							return false;
 						}
 						if(res.error==0){
-							if(res.isFollow==0){
+							if(res.data.isFollow==0){
 								that.followStr="关注";
 							}else{
 								that.followStr="已关注";

@@ -63,7 +63,7 @@
 					dataType:"json",
 					success:function(res){
 						that.pageLoad=true;
-						that.pageData=res;
+						that.pageData=res.data;
 						that.$nextTick(function(){
 							uni.pageScrollTo({
 								scrollTop:100000

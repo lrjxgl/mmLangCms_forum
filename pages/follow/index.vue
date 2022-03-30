@@ -64,9 +64,9 @@
 					},
 					success: function(res) {
 						that.isFirst=false;
-						that.per_page=res.per_page;
-						for(var i in res.list){
-							that.list.push(res.list[i]);
+						that.per_page=res.data.per_page;
+						for(var i in res.data.list){
+							that.list.push(res.data.list[i]);
 						}
 						
 					}
@@ -82,9 +82,9 @@
 					},
 					success: function(res) {
 						that.isFirst=false;
-						that.per_page=res.per_page;
-						for(var i in res.list){
-							that.list.push(res.list[i]);
+						that.per_page=res.data.per_page;
+						for(var i in res.data.list){
+							that.list.push(res.data.list[i]);
 						}
 					}
 				})

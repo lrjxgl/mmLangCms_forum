@@ -24,7 +24,7 @@
 				that.app.get({
 					url:that.app.apiHost+"/dataapi/aboutus",
 					success:function(res){
-						that.data=res.data;
+						that.data=res.data.data;
 					}
 				})
 			}

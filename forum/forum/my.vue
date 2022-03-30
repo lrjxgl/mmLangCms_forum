@@ -8,8 +8,8 @@
 					<div v-if="item.videourl" class="iconfont cl-red mgr-5 icon-video"></div>
 					<div class="flex-1">{{item.title}}</div>
 				</div>		
-				<view @click="goForum(item.id)" class="sglist-imglist" v-if="item.imgslist">                   
-					<image v-for="(img,imgIndex) in item.imgslist" :key="imgIndex" :src="img+'.100x100.png'" class="sglist-imglist-img"  mode="widthFix" ></image>
+				<view @click="goForum(item.id)" class="sglist-imglist" v-if="item.imgList && item.imgList.length>0">                   
+					<image v-for="(img,imgIndex) in item.imgList" :key="imgIndex" :src="img+'.100x100.png'" class="sglist-imglist-img"  mode="widthFix" ></image>
 				</view>
 				
 				<view class="flex sglist-ft">
@@ -77,8 +77,8 @@
 					success:function(res){
 						that.isFirst=false;
 						that.pageLoad=true;
-						that.list=res.list;
-						that.per_page=res.per_page;
+						that.list=res.data.list;
+						that.per_page=res.data.per_page;
 						 
 					}
 				})
@@ -91,16 +91,16 @@
 					url:that.app.apiHost+"/forum/my",
 					success:function(res){
 						if(that.isFirst){
-							that.list=res.list;
+							that.list=res.data.list;
 						}else{
-							for(var i in res.list){
-								that.list.push(res.list[i])
+							for(var i in res.data.list){
+								that.list.push(res.data.list[i])
 							}
 						}
 						that.isFirst=false;
 						that.pageLoad=true;
 						
-						that.per_page=res.per_page;
+						that.per_page=res.data.per_page;
 						 
 					}
 				})

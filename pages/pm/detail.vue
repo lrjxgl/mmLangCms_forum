@@ -126,7 +126,7 @@
 						t_userid:that.t_userid
 					},
 					success:function(res){
-						that.hasNew=res.data;
+						that.hasNew=res.data.data;
 						
 					}
 				})
@@ -151,13 +151,13 @@
 						}
 						that.setTimer();
 						that.isFirst=false;
-						that.user=res.user;
-						that.ssuser=res.ssuser;
+						that.user=res.data.user;
+						that.ssuser=res.data.ssuser;
 						that.hasNew=0;
-						that.list=res.list;
-						that.per_page=res.per_page;
+						that.list=res.data.list;
+						that.per_page=res.data.per_page;
 						uni.setNavigationBarTitle({
-							title:res.user.nickname
+							title:res.data.user.nickname
 						})
 						var it=setTimeout(function(){
 							const query = uni.createSelectorQuery().in(that);
@@ -189,8 +189,8 @@
 						that.hasNew=0;
 						that.per_page=res.per_page;
 						var list = that.list;
-						for (var i in res.list) {
-							list.unshift(res.list[i]);
+						for (var i in res.data.list) {
+							list.unshift(res.data.list[i]);
 						}						
 						that.list =list;
 						setTimeout(function() {

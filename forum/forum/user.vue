@@ -118,9 +118,9 @@
 							that.unLogin=true;
 						}else{
 							that.unLogin=false;
-							that.user = res.user;
-							that.topic_num=res.topic_num;
-							that.comment_num=res.comment_num;
+							that.user = res.data.user;
+							that.topic_num=res.data.topic_num;
+							that.comment_num=res.data.comment_num;
 						}
 						that.pageLoad = true;
 						

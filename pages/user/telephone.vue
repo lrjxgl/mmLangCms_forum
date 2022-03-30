@@ -63,7 +63,7 @@
 					url:that.app.apiHost+"/user/info",
 					 
 					success:function(res){
-						that.user=res.user;
+						that.user=res.data.user;
 					}
 				})
 			},

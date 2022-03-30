@@ -71,15 +71,14 @@
 			getYzm:function(){
 					if(!yzmEnable) return false;
 					var that=this;
-					uni.request({
+					that.app.get({
 						url:that.app.apiHost+"/register/sendsms",
 						data:{
 							telephone:this.telephone,
-							fromapp:that.app.fromapp()
 						},
 						success:function(res){
 							uni.showToast({
-								title:res.data.message,
+								title:res.message,
 							})
 							if(!res.error){
 								that.downTimer();
@@ -103,10 +102,10 @@
 						if(res.error){
 							return false;
 						}else{
-							uni.setStorageSync("token",res.token);
-							uni.setStorageSync("token_expire",res.token_expire);
-							uni.setStorageSync("refresh_token",res.refresh_token);
-							uni.setStorageSync("refresh_token_expire",res.refresh_token_expire);
+							uni.setStorageSync("token",res.data.token);
+							uni.setStorageSync("token_expire",res.data.token_expire);
+							uni.setStorageSync("refresh_token",res.data.refresh_token);
+							uni.setStorageSync("refresh_token_expire",res.data.refresh_token_expire);
 							
 							setTimeout(function(){
 								uni.reLaunch({

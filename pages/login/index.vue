@@ -133,40 +133,32 @@
 			},
 			formSubmit: function(e) {
 				var that = this;
-				uni.request({
+				that.app.post({
 					url: that.app.apiHost + "/login/save",
-					method: "POST",
-					header: {
-						"content-type": "application/x-www-form-urlencoded"
-					},
+					unLogin:true,
 					data: {
 						telephone: that.telephone,
 						password: that.password
 					},
-					success: function(e) {
-						 
-						var res = e.data;
+					success: function(res) {
 						if (res.error) {
 							uni.showToast({
-								"title": res.message
+								"title": res.message,
+								icon:"none"
 							})
 						} else {
 							 
-							uni.setStorageSync("token",res.token);
-							uni.setStorageSync("token_expire",res.token_expire);
-							uni.setStorageSync("refresh_token",res.refresh_token);
-							uni.setStorageSync("refresh_token_expire",res.refresh_token_expire);
+							uni.setStorageSync("token",res.data.token);
+							uni.setStorageSync("token_expire",res.data.token_expire);
+							uni.setStorageSync("refresh_token",res.data.refresh_token);
+							uni.setStorageSync("refresh_token_expire",res.data.refresh_token_expire);
 							uni.showToast({
-								"title": res.message
+								"title": res.message,
+								icon:"none"
 							});
-							 
-							setTimeout(function() {
-								uni.navigateBack({
-									delta: 1,
-								});
-							}, 1000)
-
-
+							uni.reLaunch({
+								url:"/pages/index/index"
+							}) 
 						}
 
 					}

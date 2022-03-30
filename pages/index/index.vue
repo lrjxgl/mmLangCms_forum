@@ -4,7 +4,7 @@
 			<page-loading></page-loading>
 		</div>
 		<div v-if="pageLoad">
-			<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
+			<swiper  :style="{height:swiperHeight+'px'}" :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
 				<swiper-item v-for="(item,key) in flashList" :key="key">
 					<view class="swiper-item">
 						<image @click="gourl(item.link1)" :src="item.imgurl" style="width:100%" mode="widthFix"></image>
@@ -68,11 +68,10 @@
 
 		},
 		onLoad: function(option) {
-			uni.setNavigationBarTitle({
-				title: '福鼎论坛'
-			});
-			var sys=uni.getSystemInfoSync();
-			this.swiperHeight=sys.windowWidth/2;
+			
+			var sys = uni.getSystemInfoSync();
+			this.swiperHeight = Math.min(640,sys.windowWidth) / 2;
+			 
 			this.getPage();
 		},
 
@@ -122,11 +121,11 @@
 							})
 						} else {
 							that.isFirst = false;
-							that.flashList=res.flashList;
+							that.flashList=res.data.flashList;
 							
-							that.navList = res.navList;
+							that.navList = res.data.navList;
 							
-							that.list=res.recList;
+							that.list=res.data.recList;
 							that.pageLoad = true;
 						}
 

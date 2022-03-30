@@ -82,7 +82,7 @@
 					url: that.app.apiHost + "/forum_group/index",
 					success: function (res) {
 						that.pageLoad = true;
-						that.list = res.list;
+						that.list = res.data.list;
 						uni.hideNavigationBarLoading();
 					}
 				})

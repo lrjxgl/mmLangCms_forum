@@ -96,11 +96,11 @@
 						id:id
 					},
 					success: function (res) {
-						that.pageData = res;
+						that.pageData = res.data;
 						
-						that.imgsData=res.data.imgsdata;
-						that.mp4url=res.data.videourl;
-						that.truemp4url=res.true_videourl;
+						that.imgsData=res.data.data.imgsdata;
+						that.mp4url=res.data.data.videourl;
+						that.truemp4url=res.data.true_videourl;
 						that.pageLoad = true;
 					}
 				})

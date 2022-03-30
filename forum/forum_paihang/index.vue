@@ -53,12 +53,12 @@
 		methods: {
 			goUser:function(userid){
 				uni.navigateTo({
-					url:"../../pageforum/forum_home/index?userid="+userid
+					url:"../../forum/forum_home/index?userid="+userid
 				})
 			},
 			goForum:function(id){
 				uni.navigateTo({
-					url:"../../pageforum/forum/show?id="+id
+					url:"../../forum/forum/show?id="+id
 				})
 			},
 			getPage: function() {
@@ -66,8 +66,8 @@
 				that.app.get({
 					url:that.app.apiHost+"/forum_paihang/index",
 					success:function(res){
-						that.wzList=res.wzList;
-						that.fsList=res.fsList;
+						that.wzList=res.data.wzList;
+						that.fsList=res.data.fsList;
 						that.pageLoad=true;
 					}
 				})

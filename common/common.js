@@ -1,8 +1,10 @@
 module.exports = {
 	//apiHost:"http://fd175.skymvc.com/",
-	//apiHost: "http://127.0.0.1:8080",
-	apiHost: "http://127.0.0.1:888",
-	//apiHost: "http://127.0.0.1:1323",
+	//apiHost: "http://127.0.0.1:8080",//java
+	//apiHost: "http://127.0.0.1:8787",//php
+	//apiHost: "http://127.0.0.1:888",
+	apiHost: "http://127.0.0.1:8000",//python
+	//apiHost: "http://127.0.0.1:1323",//go
 	appRoot: "https://www.fd175.com/uniapp/h5/",
 	wsHost: "wss://wss.deituicms.com:8282",
 	
@@ -139,7 +141,12 @@ module.exports = {
 			method: "GET",
 			data: ops.data,
 			success: (rs) => {
-
+				if(typeof(rs.data)=="string"){
+					uni.showToast({
+						title:"网络出错"
+					})
+					return false
+				}
 				if (rs.data.error == 1000 && ops.unLogin == undefined) {
 					uni.navigateTo({
 						url: "../../pages/login/index"
@@ -167,6 +174,13 @@ module.exports = {
 				"content-type": "application/x-www-form-urlencoded"
 			},
 			success: (rs) => {
+				 
+				if(typeof(rs.data)=="string" || typeof(rs.data.error)=="undefined"){
+					uni.showToast({
+						title:"接口出错"
+					})
+					return false
+				}
 				if (rs.data.error == 1000 && ops.unLogin == undefined) {
 					uni.navigateTo({
 						url: "../../pages/login/index"
